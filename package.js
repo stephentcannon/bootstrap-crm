@@ -11,23 +11,44 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.0.3.1');
+  api.versionsFrom('1.0');
+  
+  api.use('mongo');
+  
   api.use([
     'templating',
     'iron:router',
     'aslagle:reactive-table',
+    'steeve:moment-dateformat',
     'steeve:iron-router-helpers',
     'steeve:bootstrap3-formfield-helpers',
-    'steeve:template-logic-helpers'
+    'steeve:template-logic-helpers',
+    'steeve:jquery-form-helpers',
     ], 'client');
+  
+  api.addFiles([
+    'lib/Tickets.js'
+  ]);
     
   api.addFiles([
     'client/lib/Router.js',
     'client/views/tickets/ticketsBreadCrumbs.html',
     'client/views/tickets/ticketsFetch.html',
+    'client/views/tickets/ticketsFetch.js',
     'client/views/tickets/ticketInsert.html',
+    'client/views/tickets/ticketInsert.js',
     'client/views/tickets/ticketUpdate.html',
-    'client/views/tickets/ticketView.html'
+    'client/views/tickets/ticketView.html',
+    'client/views/tickets/ticketView.js'
     ], 'client');
+  
+  api.addFiles('server/tickets.js', 'server');
+  
+  api.use([
+    'steeve:kenny-loggins',
+    ], 'server');
+  
+  api.export('Tickets');
+  
 });
 

@@ -1,0 +1,61 @@
+<template name="ticketView">
+  {{> ticketsBreadCrumbs}}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th colspan="2">
+              <center>{{title}}</center>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Status</td>
+            <td>{{status}}</td>
+          </tr>
+          <tr>
+            <td>Created</td>
+            <td>{{dateFormat createdAt}}</td>
+          </tr>
+          <tr>
+            <td>Last Updated</td>
+            <td>{{dateFormat updatedAt}}</td>
+          </tr>
+          <tr>
+            <td>Description</td>
+            <td>{{description}}</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <center>Commments</center>
+            </td>
+          </tr>
+          {{#each comments}}
+            <tr>
+              <td>
+                {{by}} on {{createdAt}}
+              </td>
+              <td>
+                {{comment}}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{#if isEqual status "open"}}
+        <form name="form" id="form">
+          {{generateTextField title='Add a comment' label='Add a comment *' id='comment' name='comment' placeholder='Enter a comment.' value=comment}}
+          
+          <button type="submit" class="btn btn-default btn-lg btn-block btn-primary btn" id="btnComment">Comment</button>
+          
+          <button type="submit" class="btn btn-default btn-lg btn-block btn-primary" id="btnCommentAndClose">Comment & Close</button>
+          
+          <button type="submit" class="btn btn-default btn-lg btn-block btn-primary" id="btnClose">Close</button>
+          
+        </form>
+      {{/if}}
+    </div>
+  </div>
+</template>
