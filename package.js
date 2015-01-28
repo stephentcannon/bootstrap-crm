@@ -24,6 +24,7 @@ Package.onUse(function(api) {
     'steeve:bootstrap3-formfield-helpers',
     'steeve:template-logic-helpers',
     'steeve:jquery-form-helpers',
+    'steeve:reactive-table-hack',
     ], 'client');
   
   api.addFiles([

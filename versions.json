@@ -193,6 +193,10 @@
       "0.0.1"
     ],
     [
+      "steeve:reactive-table-hack",
+      "0.4.6"
+    ],
+    [
       "steeve:template-logic-helpers",
       "0.0.1"
     ],

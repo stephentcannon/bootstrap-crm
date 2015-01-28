@@ -9,10 +9,10 @@ Template.ticketView.events({
       Meteor.call('updateTicketComments', params, function (error) {
       // identify the error
         if (error) {
-          console.log(error);
           Alert.setMessage({title: 'Error', message: error, type: 'danger', offset: 'top', offsetAmount: 60, align: 'center'});
         } else {
-          Alert.setMessage({title: 'Success', message: 'We have received your ticket and will respond shortly.', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
+          $("#form").reset();
+          Alert.setMessage({title: 'Success', message: 'Thank you for your comment', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
         }
       });
 
@@ -25,15 +25,18 @@ Template.ticketView.events({
     event.preventDefault();
     try{
       var params = $('#form').toJSON();
+      params._id = this._id;
       params.status = 'closed';
       console.log(params);
       Tickets.validateUpdateParams(params, this.status);
       Tickets.validateStatusUpdateParams(params);
-      Tickets.update({_id: this._id}, {$set: params}, function(error, _id){
-        if(error){
+      Meteor.call('updateTicketComments', params, function (error) {
+      // identify the error
+        if (error) {
           Alert.setMessage({title: 'Error', message: error, type: 'danger', offset: 'top', offsetAmount: 60, align: 'center'});
         } else {
-          Alert.setMessage({title: 'Success', message: 'We have received your ticket and will respond shortly. ', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
+          $("#form").reset();
+          Alert.setMessage({title: 'Success', message: 'Thank you for your comment', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
         }
       });
     }catch(error){
