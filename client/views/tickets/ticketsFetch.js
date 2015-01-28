@@ -1,24 +1,7 @@
-Template.ticketsFetch.rendered = function(){
-  ReactiveTableHack.injectIntoTableFilter(this);
-};
-
-Template.ticketsFetch.events({
-  'keyup .reactive-table-input': function(event, template){
-    ReactiveTableHack.interceptEvents(event, template);
-  },
-  'blur #end_date': function(event, template){
-    ReactiveTableHack.blurDateEvent(event, template, 'end_date_selected');
-  },
-  'blur #start_date': function(event, template){
-    ReactiveTableHack.blurDateEvent(event, template, 'start_date_selected');
-  },
-});
-
-
 Template.ticketsFetch.helpers({
   ticketsTableSettings: function () {
     return {
-      //showFilter: true,
+      showFilter: false,
       collection: Tickets.find(),
       useFontAwesome: true,
       group: 'tickets',
@@ -48,6 +31,13 @@ Template.ticketsFetch.helpers({
           label: 'Status'
         },
         {
+          key: 'comments',
+          label: 'Comments',
+          fn: function(comments, object){
+            return comments.length;
+          }
+        },
+        {
           key:'createdAt',
           label: 'Created',
           fn: function(createdAt, object){
@@ -57,6 +47,7 @@ Template.ticketsFetch.helpers({
         {
           key:'updatedAt',
           label: 'Last Updated',
+          sort: 'descending',
           fn: function(updatedAt, object){
             return moment( updatedAt ).format('MMM DD, YYYY hh:mm:ss');
           }

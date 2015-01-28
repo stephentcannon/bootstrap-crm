@@ -1,3 +1,9 @@
+Router.onRun(function() {
+  Session.set('bootstrap_crm_start_date_selected', moment().subtract(7, 'd').format("MM/DD/YYYY") );
+  Session.set('bootstrap_crm_end_date_selected',   moment().add(1, 'd').format("MM/DD/YYYY") );
+  Session.set('bootstrap_crm_ticket_status', 'open');
+  this.next();
+});
 
 // TICKETS FETCH
 Router.route('/tickets', {
@@ -6,7 +12,11 @@ Router.route('/tickets', {
   // TODO: will need to subscribe based on status (open, closed)
   waitOn: function () {
     //console.log('waitOn ran for upgrade');
-    return Meteor.subscribe('tickets');
+    return Meteor.subscribe('tickets', {
+      start_date: Session.get('bootstrap_crm_start_date_selected'),
+      end_date: Session.get('bootstrap_crm_end_date_selected'),
+      status: Session.get('bootstrap_crm_ticket_status') }
+      );
   },
   data: function () {
     if (this.ready()){

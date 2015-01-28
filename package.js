@@ -24,7 +24,6 @@ Package.onUse(function(api) {
     'steeve:bootstrap3-formfield-helpers',
     'steeve:template-logic-helpers',
     'steeve:jquery-form-helpers',
-    'steeve:reactive-table-hack',
     ], 'client');
   
   api.addFiles([
@@ -32,6 +31,7 @@ Package.onUse(function(api) {
   ]);
     
   api.addFiles([
+    'client/css/tickets.css',
     'client/lib/Router.js',
     'client/views/tickets/ticketsBreadCrumbs.html',
     'client/views/tickets/ticketsFetch.html',
@@ -40,7 +40,9 @@ Package.onUse(function(api) {
     'client/views/tickets/ticketInsert.js',
     'client/views/tickets/ticketUpdate.html',
     'client/views/tickets/ticketView.html',
-    'client/views/tickets/ticketView.js'
+    'client/views/tickets/ticketView.js',
+    'client/views/tickets/ticketsSideBar.html',
+    'client/views/tickets/ticketsSideBar.js'
     ], 'client');
   
   api.addFiles('server/tickets.js', 'server');

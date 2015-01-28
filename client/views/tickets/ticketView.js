@@ -4,7 +4,7 @@ Template.ticketView.events({
     try{
       var params = $('#form').toJSON();
       params._id = this._id;
-      console.log(params);
+      //console.log(params);
       Tickets.validateUpdateParams(params, this.status);
       Meteor.call('updateTicketComments', params, function (error) {
       // identify the error
@@ -17,7 +17,7 @@ Template.ticketView.events({
       });
 
     }catch(error){
-      console.log(error);
+      //console.log(error);
       Alert.setMessage({title: 'Error', message: error, type: 'danger', offset: 'top', offsetAmount: 60, align: 'center'});
     }
   },
@@ -27,7 +27,7 @@ Template.ticketView.events({
       var params = $('#form').toJSON();
       params._id = this._id;
       params.status = 'closed';
-      console.log(params);
+      //console.log(params);
       Tickets.validateUpdateParams(params, this.status);
       Tickets.validateStatusUpdateParams(params);
       Meteor.call('updateTicketComments', params, function (error) {

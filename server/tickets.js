@@ -1,6 +1,26 @@
-Meteor.publish("tickets", function(){
+Meteor.publish("tickets", function(options){
+  // console.log('publishing tickets');
+  // console.log('options');
+  // console.log(options);
+  
   if(this.userId){
-    return Tickets.find({owner: this.userId});
+    var query = {
+      owner: this.userId
+    }
+    if(options.status){
+      query.status = options.status
+    }
+    
+    if(options.start_date && options.end_date){
+      query.updatedAt = {
+        $gte: new Date(moment(options.start_date)),
+        $lt: new Date(moment(options.end_date).add(1440, 'minutes'))
+      }
+    }
+
+    // console.log('the query');
+    // console.log(query);
+    return Tickets.find(query);
   }
 });
 

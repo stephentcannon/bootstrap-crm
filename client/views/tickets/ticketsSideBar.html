@@ -1,0 +1,40 @@
+<template name="ticketsSideBar">
+  {{#if currentUser}}
+    <a id="menu-toggle" href="#" class="btn btn-default toggle">
+      <i class="fa fa-bars"></i>
+    </a>
+    <br/><br/>
+    <div id="tickets-sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <!-- pull-left or pull-right -->
+        <form role="form" name="form" id="form">
+          <div class="form-group">
+            <label for="bootstrap_crm_start_date">Start Date</label>
+            <input class="form-control" type="date" id="start_date" name="start_date" value="{{getStartDate}}" data-toggle="tooltip" title="Select a valid Start Date. Format: mm/dd/yyyy">
+          </div>
+          
+          <div class="form-group">
+            <label for="bootstrap_crm_end_date">End Date</label>
+            <input class="form-control" type="date" id="end_date" name="end_date" value="{{getEndDate}}" data-toggle="tooltip" title="Select a valid End Date. Format: mm/dd/yyyy">
+          </div>
+          
+          <div class="form-group">
+            <label for="bootstrap_crm_ticket_status">Status</label>
+            <select class="form-control tickets-sidebar-form-control" name="status" id="status">
+              {{#if getStatus}}
+                <option value="{{getStatus}}" selected>{{getStatus}}</option>
+              {{/if}}
+              <option value="">both</option>
+              <option value="open">open</option>
+              <option value="closed">closed</option>
+            </select>
+          </div>
+          
+          <button type="submit" class="btn btn-default">Search</button>
+          
+        </form>
+        
+      </ul>
+    </div>
+  {{/if}}
+</template>

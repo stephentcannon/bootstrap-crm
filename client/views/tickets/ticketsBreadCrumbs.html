@@ -9,12 +9,12 @@
 <template name="ticketsBreadCrumbFetch">
   {{#if isRoute "tickets"}}
     <li class="active">
-      <i class="fa fa-cubes"></i> Manage Tickets
+      <i class="fa fa-life-ring"></i> Manage Support Tickets
     </li>
   {{else}}
     <li data-toggle="tooltip" title="Click to manage all tickets.">
       <a href="{{pathFor 'ticketsFetch'}}">
-        <i class="fa fa-cubes"></i> Manage Tickets
+        <i class="fa fa-life-ring"></i> Manage Support Tickets
       </a>
     </li>
   {{/if}}
