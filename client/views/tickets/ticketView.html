@@ -28,9 +28,9 @@
             <td>{{{description}}}</td>
           </tr>
           <tr>
-            <td colspan="2">
+            <th colspan="2">
               <center>Comments</center>
-            </td>
+            </th>
           </tr>
           {{#each comments}}
             <tr>
@@ -53,9 +53,9 @@
     
           <button type="submit" class="btn btn-default btn-lg btn-block btn-primary btn" id="btnComment">Comment</button>
           
-          <button type="submit" class="btn btn-default btn-lg btn-block btn-primary" id="btnCommentAndClose">Comment & Close</button>
+          <button type="submit" class="btn btn-default btn-lg btn-block btn-warning" id="btnCommentAndClose">Comment & Close</button>
           
-          <button type="submit" class="btn btn-default btn-lg btn-block btn-primary" id="btnClose">Close</button>
+          <button type="submit" class="btn btn-default btn-lg btn-block btn-danger" id="btnClose">Close</button>
           
         </form>
       {{/if}}

@@ -13,7 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.0');
   
-  api.use('mongo');
+  api.use(['mongo', 'accounts-password']);
   
   api.use([
     'templating',
@@ -38,14 +38,16 @@ Package.onUse(function(api) {
     'client/views/tickets/ticketsFetch.js',
     'client/views/tickets/ticketInsert.html',
     'client/views/tickets/ticketInsert.js',
-    'client/views/tickets/ticketUpdate.html',
     'client/views/tickets/ticketView.html',
     'client/views/tickets/ticketView.js',
     'client/views/tickets/ticketsSideBar.html',
     'client/views/tickets/ticketsSideBar.js'
     ], 'client');
   
-  api.addFiles('server/tickets.js', 'server');
+  api.addFiles([
+    'server/tickets.js',
+    'server/Tickets.emailTemplates.js'
+    ], 'server');
   
   api.use([
     'steeve:kenny-loggins',

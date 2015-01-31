@@ -12,7 +12,7 @@ Template.ticketView.events({
           Alert.setMessage({title: 'Error', message: error, type: 'danger', offset: 'top', offsetAmount: 60, align: 'center'});
         } else {
           $("#form").reset();
-          Alert.setMessage({title: 'Success', message: 'Thank you for your comment', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
+          Alert.setMessage({title: 'Success', message: 'Thank you for your comment. ', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
         }
       });
 
@@ -36,7 +36,7 @@ Template.ticketView.events({
           Alert.setMessage({title: 'Error', message: error, type: 'danger', offset: 'top', offsetAmount: 60, align: 'center'});
         } else {
           $("#form").reset();
-          Alert.setMessage({title: 'Success', message: 'Thank you for your comment', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
+          Alert.setMessage({title: 'Success', message: 'Thank you for your comment. ', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
         }
       });
     }catch(error){
@@ -46,18 +46,20 @@ Template.ticketView.events({
   'click #btnClose': function(event, template){
     event.preventDefault();
     try{
-      var params = {
-        status: 'closed'
-      }
-      Tickets.validateStatusUpdateParams(params);
-      Tickets.update({_id: this._id}, {$set: params}, function(error, _id){
-        if(error){
+      var params = {};
+      params._id = this._id;
+      Meteor.call('closeTicket', params, function (error) {
+      // identify the error
+        if (error) {
+          console.log(error);
           Alert.setMessage({title: 'Error', message: error, type: 'danger', offset: 'top', offsetAmount: 60, align: 'center'});
         } else {
-          Alert.setMessage({title: 'Success', message: 'We have received your ticket and will respond shortly. ', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
+          $("#form").reset();
+          Alert.setMessage({title: 'Success', message: 'Your ticket has been closed. ', type: 'success', offset: 'top', offsetAmount: 60, align: 'center'});
         }
       });
     }catch(error){
+      console.log(error);
       Alert.setMessage({title: 'Error', message: error, type: 'danger', offset: 'top', offsetAmount: 60, align: 'center'});
     }
   }

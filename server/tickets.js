@@ -66,7 +66,8 @@ Meteor.methods({
               var comment = {
                 comment: params.comment,
                 createdAt: ts,
-                by: userForDoc
+                by: userForDoc,
+                userId: this.userId
               };
               
               update['$addToSet'] = {
@@ -83,7 +84,15 @@ Meteor.methods({
               update['$set'] = setData;
               
               //console.log(update);
-              Tickets.update({_id: params._id}, update);
+              Tickets.update({_id: params._id}, update,function(error){
+                if(!error && params.status == 'closed'){
+                  var newTicket = Tickets.findOne({_id: params._id});
+                  Tickets.emailTicketClosed(newTicket);
+                }
+              });
+              
+              Tickets.emailNewComment(ticket, comment);
+              
             } else {
               throw("Comment not accepted.  Support ticket is closed.")
             }
@@ -99,9 +108,36 @@ Meteor.methods({
       throw new Meteor.Error(500, error);
     }
   },
-  updateTicketStatus: function(params){
+  closeTicket: function(params){
     //params._id = tickets._id
-    //params.stats = tickets.status
+    try{
+      if(this.userId){
+        var ticket = Tickets.findOne({_id: params._id});
+          if(ticket){
+            if(ticket.status == 'open'){
+              Tickets.update({_id: params._id}, {$set: {status: 'closed'}}, function(error){
+                if(!error)
+                  Tickets.emailTicketClosed(ticket);
+              });
+              
+            }else {
+              throw 'Invalid ticket status.  Must be open to close.';
+            }
+          } else {
+            throw ("Invalid support ticket.");
+          }
+      } else {
+        throw ("Invalid user.");
+      }
+    }catch(error){
+      //console.log(error);
+      throw new Meteor.Error(500, error);
+    }
+  },
+  changeTicketStatus: function(params){
+    //params._id = tickets._id;
+    //params.status = 'open', 'closed'
+    // can only be executed by Meteor.user.admin == true
   }
 });
 
@@ -152,12 +188,13 @@ Tickets.allow({
       
       Tickets.validateInsertParams(doc);
       
-      // TODO: send email to owner and to admin
-      
+      Tickets.emailNewTicket(doc)
+    
       return true;
     }catch(error){
       throw new Meteor.Error(500, 'Server error: ' + error);
       return false;
     }
   },
+  transform: function (doc) { return doc; }
 });
