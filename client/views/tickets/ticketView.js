@@ -9,6 +9,8 @@ Template.ticketView.events({
       Meteor.call('updateTicketComments', params, function (error) {
       // identify the error
         if (error) {
+          // console.log('inside error');
+          // console.log(error);
           Alert.setMessage({title: 'Error', message: error, type: 'danger', offset: 'top', offsetAmount: 60, align: 'center'});
         } else {
           $("#form").reset();

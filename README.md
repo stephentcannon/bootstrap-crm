@@ -75,5 +75,14 @@ This is an Object with several fields that are used to generate text/html for th
 * supports override
 * use ticket object to create a response
 
+# Tickets.emailTemplates.ticketClosed.html(ticket) and .text(ticket)
+* defaults to standard fields emailed notifying of closed
+* supports override
+* use ticket object to create a response
+
+# Tickets.emailTemplates.ticketClosed.subject(ticket)
+* default: 'Support Ticket Closed: ' + ticket.title
+* supports override
+* use ticket object to create a response
 
 
