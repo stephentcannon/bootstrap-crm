@@ -65,7 +65,7 @@ Meteor.methods({
               
               var userForDoc = '';
               if(user.profile){
-                if(user.profile.lastname || user.profile.firstname){
+                if(user.profile.firstname || user.profile.lastname){
                   if(user.profile.lastname){
                     userForDoc = user.profile.lastname;
                   }
@@ -77,7 +77,10 @@ Meteor.methods({
                 } else {
                   userForDoc = user.emails[0].address;
                 }
+              } else {
+                userForDoc = user.emails[0].address;
               }
+              
               var ts = new Date();
               var update = {};
                
@@ -182,7 +185,7 @@ Tickets.deny({
         var user = Meteor.users.findOne({_id: userId});
         var userForDoc = '';
         if(user.profile){
-          if(user.profile.lastname || user.profile.firstname){
+          if(user.profile.firstname || user.profile.lastname){
             if(user.profile.lastname){
               userForDoc = user.profile.lastname;
             }
@@ -194,6 +197,8 @@ Tickets.deny({
           } else {
             userForDoc = user.emails[0].address;
           }
+        } else {
+          userForDoc = user.emails[0].address;
         }
         doc.user = userForDoc
         doc.status = 'open';
