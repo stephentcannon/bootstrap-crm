@@ -1,68 +1,70 @@
 <template name="ticketView">
-  {{> ticketsBreadCrumbs}}
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <table class="table table-bordered table-striped table-hover">
-        <thead>
-          <tr>
-            <th colspan="2">
-              <center>{{{title}}}</center>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Created By</td>
-            <td>{{user}}</td>
-          </tr>
-          <tr>
-            <td>Status</td>
-            <td>{{status}}</td>
-          </tr>
-          <tr>
-            <td>Created</td>
-            <td>{{dateFormat createdAt}}</td>
-          </tr>
-          <tr>
-            <td>Last Updated</td>
-            <td>{{dateFormat updatedAt}}</td>
-          </tr>
-          <tr>
-            <td>Description</td>
-            <td>{{{description}}}</td>
-          </tr>
-          <tr>
-            <th colspan="2">
-              <center>Comments</center>
-            </th>
-          </tr>
-          {{#each comments}}
+  <div class="container-fluid clearfix">
+    {{> ticketsBreadCrumbs}}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
             <tr>
-              <td>
-                {{by}} on {{dateFormat createdAt}}
-              </td>
-              <td>
-                {{{comment}}}
-              </td>
+              <th colspan="2">
+                <center>{{{title}}}</center>
+              </th>
             </tr>
-          {{/each}}
-        </tbody>
-      </table>
-      {{#if isEqual status "open"}}
-        <form name="form" id="form">
-          <div class="form-group">
-            <label>Comment on this Support Ticket</label>
-            <textarea class="form-control" name="comment" id="comment" rows="5" required="required"></textarea>
-          </div>
-    
-          <button type="submit" class="btn btn-default btn-lg btn-block btn-primary btn" id="btnComment">Comment</button>
-          
-          <button type="submit" class="btn btn-default btn-lg btn-block btn-warning" id="btnCommentAndClose">Comment & Close</button>
-          
-          <button type="submit" class="btn btn-default btn-lg btn-block btn-danger" id="btnClose">Close</button>
-          
-        </form>
-      {{/if}}
+          </thead>
+          <tbody>
+            <tr>
+              <td>Created By</td>
+              <td>{{user}}</td>
+            </tr>
+            <tr>
+              <td>Status</td>
+              <td>{{status}}</td>
+            </tr>
+            <tr>
+              <td>Created</td>
+              <td>{{dateFormat createdAt}}</td>
+            </tr>
+            <tr>
+              <td>Last Updated</td>
+              <td>{{dateFormat updatedAt}}</td>
+            </tr>
+            <tr>
+              <td>Description</td>
+              <td>{{{description}}}</td>
+            </tr>
+            <tr>
+              <th colspan="2">
+                <center>Comments</center>
+              </th>
+            </tr>
+            {{#each comments}}
+              <tr>
+                <td>
+                  {{by}} on {{dateFormat createdAt}}
+                </td>
+                <td>
+                  {{{comment}}}
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        {{#if isEqual status "open"}}
+          <form name="form" id="form">
+            <div class="form-group">
+              <label>Comment on this Support Ticket</label>
+              <textarea class="form-control" name="comment" id="comment" rows="5" required="required"></textarea>
+            </div>
+      
+            <button type="submit" class="btn btn-default btn-lg btn-block btn-primary btn" id="btnComment">Comment</button>
+            
+            <button type="submit" class="btn btn-default btn-lg btn-block btn-warning" id="btnCommentAndClose">Comment & Close</button>
+            
+            <button type="submit" class="btn btn-default btn-lg btn-block btn-danger" id="btnClose">Close</button>
+            
+          </form>
+        {{/if}}
+      </div>
     </div>
   </div>
 </template>
