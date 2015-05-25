@@ -17,13 +17,13 @@ Package.onUse(function(api) {
   
   api.use([
     'templating',
-    'iron:router',
-    'aslagle:reactive-table',
-    'steeve:moment-dateformat',
-    'steeve:iron-router-helpers',
-    'steeve:bootstrap3-formfield-helpers',
-    'steeve:template-logic-helpers',
-    'steeve:jquery-form-helpers',
+    'iron:router@1.0.5',
+    'aslagle:reactive-table@0.7.8',
+    'steeve:moment-dateformat@0.0.1',
+    'steeve:iron-router-helpers@0.0.5',
+    'steeve:bootstrap3-formfield-helpers@0.0.2',
+    'steeve:template-logic-helpers@0.0.1',
+    'steeve:jquery-form-helpers@0.0.7',
     ], 'client');
   
   api.addFiles([
@@ -50,7 +50,7 @@ Package.onUse(function(api) {
     ], 'server');
   
   api.use([
-    'steeve:kenny-loggins',
+    'steeve:kenny-loggins@0.0.5',
     ], 'server');
   
   api.export('Tickets');
